@@ -9,7 +9,7 @@
 cd ~ 
 # ---------------------- install essential packages
 sudo apt update && sudo apt install tmux zsh vim curl git xclip \
-python3-pip python3-dev git libssl-dev libffi-dev build-essential -y
+python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip -y
 
 # ----------------------  dracula tmux theme
 
@@ -33,6 +33,10 @@ bind -n S-Right next-window
 set -g mouse on
 set -g history-limit 10000
 
+# Set new panes to open in current directory
+bind c new-window -c "#{pane_current_path}"
+bind '"' split-window -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"
 
 
 # ------ TPM
@@ -47,10 +51,6 @@ set -g @dracula-show-time false
 set -g @dracula-show-weather false
 set -g @dracula-show-network false
 
-# Set new panes to open in current directory
-bind c new-window -c "#{pane_current_path}"
-bind '"' split-window -c "#{pane_current_path}"
-bind % split-window -h -c "#{pane_current_path}"
 
 # autoinstall 
 if "test ! -d ~/.tmux/plugins/tpm" \
@@ -90,7 +90,7 @@ chsh -s `which zsh`
 
 # ---------------------- install Caskaydia Cove Nerd Font
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip -O /tmp/CascadiaCode.zip
-mkdir ~/.local/share/fonts ;  unzip /tmp/CascadiaCode.zip Caskaydia\ Cove\ Nerd\ Font\ Complete.ttf -d ~/.local/share/fonts
+mkdir -p ~/.local/share/fonts ;  unzip /tmp/CascadiaCode.zip Caskaydia\ Cove\ Nerd\ Font\ Complete.ttf -d ~/.local/share/fonts
 
 # ---------------------- install gef in gdb 
 wget -O ~/.gdbinit-gef.py -q https://github.com/hugsy/gef/raw/master/gef.py
