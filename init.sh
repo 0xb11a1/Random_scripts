@@ -8,8 +8,10 @@
 
 cd ~ 
 # ---------------------- install essential packages
-sudo apt update && sudo apt install tmux zsh vim curl git xclip \
+sudo apt update && sudo apt install tmux zsh vim curl git xclip gdb wget  \
 python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip -y
+
+sudo apt install golang
 
 # ----------------------  dracula tmux theme
 
@@ -46,10 +48,8 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'dracula/tmux'
 
 # conf for darcula/tmux 
-set -g @dracula-show-location false
-set -g @dracula-show-time false
-set -g @dracula-show-weather false
-set -g @dracula-show-network false
+set -g @dracula-plugins "battery"
+set -g @dracula-show-powerline true
 
 
 # autoinstall 
@@ -63,11 +63,10 @@ EOF
 # ---------------------- oh my zsh
 sh -c "$(wget -qO- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended 
 
-# adding 'agkozak' theme
-[[ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes ]] && mkdir ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes
-git clone https://github.com/agkozak/agkozak-zsh-prompt ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/agkozak
-ln -s ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/agkozak/agkozak-zsh-prompt.plugin.zsh ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/agkozak.zsh-theme
-sed -E  's/ZSH_THEME="(.+)"/ZSH_THEME="agkozak"/g' -i .zshrc 
+# adding 'spaceship' theme
+git clone https://github.com/spaceship-prompt/spaceship-prompt.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/spaceship-prompt" --depth=1
+ln -s "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/spaceship-prompt/spaceship.zsh-theme" "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/spaceship.zsh-theme"
+sed -E  's/ZSH_THEME="(.+)"/ZSH_THEME="spaceship"/g' -i .zshrc 
 
 # install extentions
 plugins_name="zsh-autosuggestions zsh-syntax-highlighting git"
@@ -76,12 +75,12 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 sed -E  "s/plugins=\((.+)\)/plugins=\(${plugins_name}\)/g" -i .zshrc
 
 # ---------------------- .zshrc dotfile
-echo "
-alias xclip='xclip -selection clipboard'
-AGKOZAK_COLORS_USER_HOST=green
-AGKOZAK_PROMPT_CHAR=( ∑ ∑# : )
-
-" >> ~/.zshrc
+echo '
+alias xclip="xclip -selection clipboard"
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+# SPACESHIP_USER_COLOR=red # enable this in VMS 
+export PATH=$PATH:/home/theuser/.local/bin:/usr/local/go/bin
+' >> ~/.zshrc
 
 # change shell to zsh
 echo '[+] changing default shell to zsh'
