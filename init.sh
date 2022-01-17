@@ -11,7 +11,7 @@ cd ~
 sudo apt update && sudo apt install tmux zsh vim curl git xclip gdb wget  \
 python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip -y
 
-sudo apt install golang
+sudo apt install golang-go -y 
 
 # ----------------------  dracula tmux theme
 
