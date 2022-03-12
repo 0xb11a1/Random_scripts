@@ -79,7 +79,8 @@ echo '
 alias xclip="xclip -selection clipboard"
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 # SPACESHIP_USER_COLOR=red # enable this in VMS 
-export PATH=$PATH:~/.local/bin:/usr/local/go/bin
+export PATH=$PATH:~/.local/bin:/usr/local/go/bin:~/go/bin
+export TERM=xterm-256color
 ' >> ~/.zshrc
 
 # change shell to zsh
