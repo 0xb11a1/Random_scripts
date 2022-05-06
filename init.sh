@@ -58,6 +58,14 @@ if "test ! -d ~/.tmux/plugins/tpm" \
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
+
+# set copy mode to Vi and enable copy on select
+setw -g mode-keys vi
+unbind -T copy-mode-vi Enter
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -selection c"
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"
+
+
 EOF
 
 # ---------------------- oh my zsh
