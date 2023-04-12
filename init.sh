@@ -13,6 +13,10 @@ python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip -y
 
 sudo apt install golang-go -y 
 
+# ---------------------- install docker
+sudo apt install docker docker-compose -y
+sudo systemctl enable docker --now
+sudo usermod -aG docker $USER
 # ----------------------  dracula tmux theme
 
 cat > .tmux.conf <<EOF
