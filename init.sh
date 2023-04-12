@@ -103,3 +103,8 @@ mkdir -p ~/.local/share/fonts ;  unzip /tmp/CascadiaCode.zip Caskaydia\ Cove\ Ne
 # ---------------------- install gef in gdb 
 wget -O ~/.gdbinit-gef.py -q https://github.com/hugsy/gef/raw/master/gef.py
 echo source ~/.gdbinit-gef.py >> ~/.gdbinit
+
+# ---------------------- log tmux panes
+#log_location=$HOME/.tmux/logs
+#test -d "$log_location" || mkdir "$log_location"
+#tmux pipe-pane "cat >> log_location/tmux_session_#S_#I_#P_$(date +%Y%m%d%H%M%S).log" 2> /dev/null
