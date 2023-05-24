@@ -9,9 +9,9 @@
 cd ~ 
 # ---------------------- install essential packages
 sudo apt update && sudo apt install tmux zsh vim curl git xclip gdb wget  \
-python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip -y
+python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip python3-venv -y
 
-sudo apt install golang-go -y 
+sudo apt install golang-go cargo -y 
 
 # ---------------------- install docker
 sudo apt install docker docker-compose -y
@@ -69,16 +69,21 @@ unbind -T copy-mode-vi Enter
 bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -selection c"
 bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"
 
+# ---------------------- log tmux panes
+#log_location=$HOME/.tmux/logs
+#test -d "$log_location" || mkdir "$log_location"
+#tmux pipe-pane "cat >> log_location/tmux_session_#S_#I_#P_$(date +%Y%m%d%H%M%S).log" 2> /dev/null
 
 EOF
 
 # ---------------------- oh my zsh
 sh -c "$(wget -qO- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended 
 
-# adding 'spaceship' theme
-git clone https://github.com/spaceship-prompt/spaceship-prompt.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/spaceship-prompt --depth=1
-ln -s ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/spaceship-prompt/spaceship.zsh-theme ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/spaceship.zsh-theme
-sed -E  's/ZSH_THEME="(.+)"/ZSH_THEME="spaceship"/g' -i .zshrc 
+# adding 'agkozak' theme
+[[ ! -d $ZSH_CUSTOM/themes ]] && mkdir $ZSH_CUSTOM/themes
+git clone https://github.com/agkozak/agkozak-zsh-prompt $ZSH_CUSTOM/themes/agkozak
+ln -s $ZSH_CUSTOM/themes/agkozak/agkozak-zsh-prompt.plugin.zsh $ZSH_CUSTOM/themes/agkozak.zsh-theme
+sed -E  's/ZSH_THEME="(.+)"/ZSH_THEME="agkozak"/g' -i .zshrc 
 
 # install extentions
 plugins_name="zsh-autosuggestions zsh-syntax-highlighting git"
@@ -87,13 +92,33 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 sed -E  "s/plugins=\((.+)\)/plugins=\(${plugins_name}\)/g" -i .zshrc
 
 # ---------------------- .zshrc dotfile
-echo '
+cat > ~/.zshrc <<EOF
+
+# --- AGKOZAK config
+AGKOZAK_CUSTOM_RPROMPT=''
+# Exit status
+AGKOZAK_CUSTOM_PROMPT='%(?..%B%F{red}(%?%)%f%b )'
+# Command execution time
+AGKOZAK_CUSTOM_PROMPT+='%(9V.%9v .)'
+# Username and hostname
+AGKOZAK_CUSTOM_PROMPT+='%(!.%S%B.%B%F{green})%n%1v%(!.%b%s.%f%b) '
+# Path
+AGKOZAK_CUSTOM_PROMPT+='%B%F{blue}%2v%f%b'
+# Virtual environment
+AGKOZAK_CUSTOM_PROMPT+='%(10V. %F{green}[%10v]%f.)'
+# Git status
+AGKOZAK_CUSTOM_PROMPT+=$'%(3V.%F{yellow}%3v%f.)\n'
+# Prompt character
+AGKOZAK_CUSTOM_PROMPT+='♜ ' #'%(4V.:.%#) '
+
+
 alias xclip="xclip -selection clipboard"
-SPACESHIP_PROMPT_ADD_NEWLINE=false
-# SPACESHIP_USER_COLOR=red # enable this in VMS 
-export PATH=$PATH:~/.local/bin:/usr/local/go/bin:~/go/bin
+
+export PATH=$PATH:~/.local/bin:/usr/local/go/bin:~/go/bin:~/.cargo/bin
 export TERM=xterm-256color
-' >> ~/.zshrc
+
+
+EOF
 
 # change shell to zsh
 echo '[+] changing default shell to zsh'
@@ -108,7 +133,3 @@ mkdir -p ~/.local/share/fonts ;  unzip /tmp/CascadiaCode.zip Caskaydia\ Cove\ Ne
 wget -O ~/.gdbinit-gef.py -q https://github.com/hugsy/gef/raw/master/gef.py
 echo source ~/.gdbinit-gef.py >> ~/.gdbinit
 
-# ---------------------- log tmux panes
-#log_location=$HOME/.tmux/logs
-#test -d "$log_location" || mkdir "$log_location"
-#tmux pipe-pane "cat >> log_location/tmux_session_#S_#I_#P_$(date +%Y%m%d%H%M%S).log" 2> /dev/null
