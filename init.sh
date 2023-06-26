@@ -13,6 +13,9 @@ python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip python3-
 
 sudo apt install golang-go cargo -y 
 
+# ---------------------- install startship zsh
+curl -sS https://starship.rs/install.sh | sh
+
 # ---------------------- install docker
 sudo apt install docker docker-compose -y
 sudo systemctl enable docker --now
@@ -79,11 +82,11 @@ EOF
 # ---------------------- oh my zsh
 sh -c "$(wget -qO- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended 
 
-# adding 'agkozak' theme
-[[ ! -d $ZSH_CUSTOM/themes ]] && mkdir $ZSH_CUSTOM/themes
-git clone https://github.com/agkozak/agkozak-zsh-prompt $ZSH_CUSTOM/themes/agkozak
-ln -s $ZSH_CUSTOM/themes/agkozak/agkozak-zsh-prompt.plugin.zsh $ZSH_CUSTOM/themes/agkozak.zsh-theme
-sed -E  's/ZSH_THEME="(.+)"/ZSH_THEME="agkozak"/g' -i .zshrc 
+# # adding 'agkozak' theme
+# [[ ! -d $ZSH_CUSTOM/themes ]] && mkdir $ZSH_CUSTOM/themes
+# git clone https://github.com/agkozak/agkozak-zsh-prompt $ZSH_CUSTOM/themes/agkozak
+# ln -s $ZSH_CUSTOM/themes/agkozak/agkozak-zsh-prompt.plugin.zsh $ZSH_CUSTOM/themes/agkozak.zsh-theme
+# sed -E  's/ZSH_THEME="(.+)"/ZSH_THEME="agkozak"/g' -i .zshrc 
 
 # install extentions
 plugins_name="zsh-autosuggestions zsh-syntax-highlighting git"
@@ -94,29 +97,25 @@ sed -E  "s/plugins=\((.+)\)/plugins=\(${plugins_name}\)/g" -i .zshrc
 # ---------------------- .zshrc dotfile
 cat > ~/.zshrc <<EOF
 
-# --- AGKOZAK config
-AGKOZAK_CUSTOM_RPROMPT=''
-# Exit status
-AGKOZAK_CUSTOM_PROMPT='%(?..%B%F{red}(%?%)%f%b )'
-# Command execution time
-AGKOZAK_CUSTOM_PROMPT+='%(9V.%9v .)'
-# Username and hostname
-AGKOZAK_CUSTOM_PROMPT+='%(!.%S%B.%B%F{green})%n%1v%(!.%b%s.%f%b) '
-# Path
-AGKOZAK_CUSTOM_PROMPT+='%B%F{blue}%2v%f%b'
-# Virtual environment
-AGKOZAK_CUSTOM_PROMPT+='%(10V. %F{green}[%10v]%f.)'
-# Git status
-AGKOZAK_CUSTOM_PROMPT+=$'%(3V.%F{yellow}%3v%f.)\n'
-# Prompt character
-AGKOZAK_CUSTOM_PROMPT+='♜ ' #'%(4V.:.%#) '
 
 
 alias xclip="xclip -selection clipboard"
 
-export PATH=$PATH:~/.local/bin:/usr/local/go/bin:~/go/bin:~/.cargo/bin
+export PATH=$PATH:~/.local/bin:/usr/local/go/bin:~/go/bin:~/.cargo/bin:~/genymotion
 export TERM=xterm-256color
 
+eval "$(starship init zsh)"
+EOF
+
+# ---------------------- starship config
+mkdir -p ~/.config && touch ~/.config/starship.toml
+
+cat > ~/.config/starship.toml <<EOF
+add_newline = false
+
+[character] 
+success_symbol = '[♜](bold green)'
+error_symbol	 = '[♜](bold red)'
 
 EOF
 
