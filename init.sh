@@ -100,11 +100,14 @@ cat > ~/.zshrc <<EOF
 
 
 alias xclip="xclip -selection clipboard"
+alias clear='clear -x'
 
 export PATH=$PATH:~/.local/bin:/usr/local/go/bin:~/go/bin:~/.cargo/bin:~/genymotion
 export TERM=xterm-256color
 
 eval "$(starship init zsh)"
+
+
 EOF
 
 # ---------------------- starship config
