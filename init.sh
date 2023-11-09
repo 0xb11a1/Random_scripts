@@ -23,6 +23,7 @@ sudo usermod -aG docker $USER
 # ----------------------  dracula tmux theme
 
 cat > .tmux.conf <<EOF
+
 # ------ added by me
 set -g prefix C-Space
 bind C-Space send-prefix
@@ -97,7 +98,19 @@ sed -E  "s/plugins=\((.+)\)/plugins=\(${plugins_name}\)/g" -i .zshrc
 # ---------------------- .zshrc dotfile
 cat > ~/.zshrc <<EOF
 
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME=""
 
+plugins=(zsh-autosuggestions zsh-syntax-highlighting git)
+
+source \$ZSH/oh-my-zsh.sh
+
+function volatility() {
+  docker run --rm --user=$(id -u):$(id -g) -v "$(pwd)":/dumps:ro,Z -ti phocean/volatility $@
+}
+
+JAVA_HOME="/usr/bin/"
+export VISUAL="vim"
 
 alias xclip="xclip -selection clipboard"
 alias clear='clear -x'
