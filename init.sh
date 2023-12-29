@@ -12,6 +12,7 @@ sudo apt update && sudo apt install tmux zsh vim curl git xclip gdb wget  \
 python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip python3-venv -y
 
 sudo apt install golang-go cargo -y 
+pip install pipx
 
 # ---------------------- install startship zsh
 curl -sS https://starship.rs/install.sh | sh
@@ -148,3 +149,11 @@ mkdir -p ~/.local/share/fonts ;  unzip /tmp/CascadiaCode.zip Caskaydia\ Cove\ Ne
 wget -O ~/.gdbinit-gef.py -q https://github.com/hugsy/gef/raw/master/gef.py
 echo source ~/.gdbinit-gef.py >> ~/.gdbinit
 
+# ---------------------- install RT tools
+pipx install git+https://github.com/Pennyw0rth/NetExec
+
+python3 -m pipx install impacket
+
+go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+
+go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
