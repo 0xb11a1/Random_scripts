@@ -54,11 +54,7 @@ bind % split-window -h -c "#{pane_current_path}"
 
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
-set -g @plugin 'dracula/tmux'
-
-# conf for darcula/tmux 
-set -g @dracula-plugins "battery"
-set -g @dracula-show-powerline true
+set -g @plugin "arcticicestudio/nord-tmux"
 
 
 # autoinstall 
