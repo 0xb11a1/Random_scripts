@@ -9,10 +9,11 @@
 cd ~ 
 # ---------------------- install essential packages
 sudo apt update && sudo apt install tmux zsh vim curl git xclip gdb wget  \
-python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip python3-venv -y
+python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip python3-venv fzf -y
 
 sudo apt install golang-go cargo -y 
 pip install pipx
+pipx ensurepath
 
 # ---------------------- install startship zsh
 curl -sS https://starship.rs/install.sh | sh
@@ -98,7 +99,7 @@ cat > ~/.zshrc <<EOF
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
 
-plugins=(zsh-autosuggestions zsh-syntax-highlighting git)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting git zsh-fzf-history-search)
 
 source \$ZSH/oh-my-zsh.sh
 
