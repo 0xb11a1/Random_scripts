@@ -3,7 +3,7 @@
 # -----------
 # |  Usage: |
 # -----------
-# bash -c "$(wget -O- https://raw.githubusercontent.com/0xb11a1/Random_scripts/main/init.sh)"
+# zsh -c "$(wget -O- https://raw.githubusercontent.com/0xb11a1/Random_scripts/main/init.sh)"
 # after installation - open tmux and press Prefix+I to install the theme
 
 cd ~ 
