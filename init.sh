@@ -13,10 +13,10 @@ python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip python3-
 
 sudo apt install golang-go cargo -y 
 pip install pipx
-pipx ensurepath
+
 
 # ---------------------- install startship zsh
-curl -sS https://starship.rs/install.sh | sh
+curl -sS https://starship.rs/install.sh | sh -y
 
 # ---------------------- install docker
 sudo apt install docker docker-compose -y
@@ -147,6 +147,9 @@ wget -O ~/.gdbinit-gef.py -q https://github.com/hugsy/gef/raw/master/gef.py
 echo source ~/.gdbinit-gef.py >> ~/.gdbinit
 
 # ---------------------- install RT tools
+pipx ensurepath
+source ~/.zshrc
+
 pipx install git+https://github.com/Pennyw0rth/NetExec
 
 python3 -m pipx install impacket
