@@ -16,7 +16,7 @@ pip install pipx
 
 
 # ---------------------- install startship zsh
-curl -sS https://starship.rs/install.sh | sh -y
+sh -c "$(wget -qO- https://starship.rs/install.sh)" "" -y
 
 # ---------------------- install docker
 sudo apt install docker docker-compose -y
