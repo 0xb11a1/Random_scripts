@@ -88,9 +88,10 @@ sh -c "$(wget -qO- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tool
 # sed -E  's/ZSH_THEME="(.+)"/ZSH_THEME="agkozak"/g' -i .zshrc 
 
 # install extentions
-plugins_name="zsh-autosuggestions zsh-syntax-highlighting git"
+plugins_name="zsh-autosuggestions zsh-syntax-highlighting git zsh-fzf-history-search"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/joshskidmore/zsh-fzf-history-search ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-fzf-history-search
 sed -E  "s/plugins=\((.+)\)/plugins=\(${plugins_name}\)/g" -i .zshrc
 
 # ---------------------- .zshrc dotfile
@@ -116,7 +117,7 @@ alias clear='clear -x'
 export PATH=$PATH:~/.local/bin:/usr/local/go/bin:~/go/bin:~/.cargo/bin:~/genymotion
 export TERM=xterm-256color
 
-eval "$(starship init zsh)"
+eval "\$(starship init zsh)"
 
 
 EOF
