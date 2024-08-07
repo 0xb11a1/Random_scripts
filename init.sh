@@ -116,6 +116,7 @@ alias clear='clear -x'
 
 export PATH=$PATH:~/.local/bin:/usr/local/go/bin:~/go/bin:~/.cargo/bin:~/genymotion
 export TERM=xterm-256color
+export LANG=C.UTF-8
 
 eval "\$(starship init zsh)"
 
