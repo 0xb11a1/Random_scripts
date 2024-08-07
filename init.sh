@@ -73,8 +73,8 @@ bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xc
 
 # ---------------------- log tmux panes
 #log_location=$HOME/.tmux/logs
-#test -d "$log_location" || mkdir "$log_location"
-#tmux pipe-pane "cat >> log_location/tmux_session_#S_#I_#P_$(date +%Y%m%d%H%M%S).log" 2> /dev/null
+#test -d "\$log_location" || mkdir "\$log_location"
+#tmux pipe-pane "cat >> \$log_location/tmux_session_#S_#I_#P_$(date +%Y%m%d%H%M%S).log" 2> /dev/null
 
 EOF
 
