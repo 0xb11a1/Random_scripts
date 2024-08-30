@@ -8,7 +8,7 @@
 
 cd ~ 
 # ---------------------- install essential packages
-sudo apt update && sudo apt install tmux zsh vim curl git xclip gdb wget  \
+sudo apt update && sudo apt install tmux zsh vim curl git xclip gdb wget htop net-tools  \
 python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip python3-venv fzf -y
 
 sudo apt install golang-go cargo -y 
