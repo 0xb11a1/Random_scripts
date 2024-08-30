@@ -129,6 +129,11 @@ mkdir -p ~/.config && touch ~/.config/starship.toml
 cat > ~/.config/starship.toml <<EOF
 add_newline = false
 
+[username]
+style_user = "green bold"
+style_root = "red bold"
+format = "[\$user](\$style) "
+
 [character] 
 success_symbol = '[♜](bold green)'
 error_symbol	 = '[♜](bold red)'
