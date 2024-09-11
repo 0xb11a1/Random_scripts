@@ -12,7 +12,7 @@ sudo apt update && sudo apt install tmux zsh vim curl git xclip gdb wget htop ne
 python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip python3-venv fzf -y
 
 sudo apt install golang-go cargo -y 
-sudo apt install pipx
+sudo apt install pipx -y
 pipx ensurepath
 sudo pipx ensurepath --global
 
