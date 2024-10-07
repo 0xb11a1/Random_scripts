@@ -18,7 +18,7 @@ sudo pipx ensurepath --global
 
 
 # ---------------------- install startship zsh
-sh -c "$(wget -qO- https://starship.rs/install.sh)" "" -y
+sudo sh -c "$(wget -qO- https://starship.rs/install.sh)" "" -y
 
 # ---------------------- install docker
 sudo NEEDRESTART_MODE=a apt install docker docker-compose -y
