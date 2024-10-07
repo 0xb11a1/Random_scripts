@@ -8,11 +8,11 @@
 
 cd ~ 
 # ---------------------- install essential packages
-sudo apt update && sudo apt install tmux zsh vim curl git xclip gdb wget htop net-tools  \
+sudo NEEDRESTART_MODE=a apt update && sudo apt install tmux zsh vim curl git xclip gdb wget htop net-tools  \
 python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip python3-venv fzf -y
 
-sudo apt install golang-go cargo -y 
-sudo apt install pipx -y
+sudo NEEDRESTART_MODE=a apt install golang-go cargo -y 
+sudo NEEDRESTART_MODE=a apt install pipx -y
 pipx ensurepath
 sudo pipx ensurepath --global
 
@@ -21,7 +21,7 @@ sudo pipx ensurepath --global
 sh -c "$(wget -qO- https://starship.rs/install.sh)" "" -y
 
 # ---------------------- install docker
-sudo apt install docker docker-compose -y
+sudo NEEDRESTART_MODE=a apt install docker docker-compose -y
 sudo systemctl enable docker --now
 sudo usermod -aG docker $USER
 # ----------------------  dracula tmux theme
@@ -144,7 +144,7 @@ EOF
 
 # change shell to zsh
 echo '[+] changing default shell to zsh'
-chsh -s `which zsh`
+sudo chsh -s `which zsh` $USER
 
 
 # ---------------------- install Caskaydia Cove Nerd Font
