@@ -78,6 +78,77 @@ bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xc
 #test -d "\$log_location" || mkdir "\$log_location"
 #tmux pipe-pane "cat >> \$log_location/tmux_session_#S_#I_#P_$(date +%Y%m%d%H%M%S).log" 2> /dev/null
 
+bind t {
+copy-mode
+  send -X clear-selection
+  send -X cursor-up
+  send -X start-of-line
+  send -X start-of-line
+  send -X cursor-up
+  send -X start-of-line
+  send -X start-of-line
+
+  if -F "#{m:*♜,#{copy_cursor_line}}" {
+    send -X search-forward-text "♜"
+    send -X stop-selection
+    send -X -N 2 cursor-right
+    send -X begin-selection
+    send -X end-of-line
+    send -X end-of-line
+    if "#{m:*♜?*,#{copy_cursor_line}}" {
+      send -X cursor-left
+    }
+  } {
+    send -X end-of-line
+    send -X end-of-line
+    send -X begin-selection
+    send -X search-backward-text "♜"
+    send -X cursor-up
+    send -X end-of-line
+    send -X end-of-line
+    send -X cursor-right
+    send -X stop-selection
+  }
+
+
+}
+
+
+bind o {
+copy-mode
+  send -X clear-selection
+  send -X cursor-up
+  send -X start-of-line
+  send -X start-of-line
+  send -X cursor-up
+  send -X start-of-line
+  send -X start-of-line
+
+  if -F "#{m:*♜,#{copy_cursor_line}}" {
+    send -X search-forward-text "♜"
+    send -X stop-selection
+    send -X -N 2 cursor-right
+    send -X begin-selection
+    send -X end-of-line
+    send -X end-of-line
+    if "#{m:*♜?*,#{copy_cursor_line}}" {
+      send -X cursor-left
+    }
+  } {
+    send -X end-of-line
+    send -X cursor-left
+    send -X begin-selection
+    send -X search-backward-text "♜"
+    #send -X cursor-up
+    send -X end-of-line
+    send -X end-of-line
+    send -X cursor-right
+    send -X stop-selection
+  }
+
+
+}
+
 EOF
 
 # ---------------------- oh my zsh
