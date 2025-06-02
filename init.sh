@@ -12,7 +12,7 @@ sudo NEEDRESTART_MODE=a apt update && sudo apt install tmux zsh vim curl git xcl
 python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip python3-venv fzf -y
 
 sudo NEEDRESTART_MODE=a apt install golang-go cargo -y 
-sudo NEEDRESTART_MODE=a apt install pipx -y
+sudo NEEDRESTART_MODE=a apt install pipx neovim -y
 pipx ensurepath
 sudo pipx ensurepath --global
 
@@ -167,6 +167,11 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/joshskidmore/zsh-fzf-history-search ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-fzf-history-search
 sed -E  "s/plugins=\((.+)\)/plugins=\(${plugins_name}\)/g" -i .zshrc
 
+
+# ---------------------- nvim 
+
+git clone https://github.com/NvChad/starter ~/.config/nvim
+
 # ---------------------- .zshrc dotfile
 cat > ~/.zshrc <<EOF
 
@@ -193,6 +198,7 @@ export LANG=C.UTF-8
 
 eval "\$(starship init zsh)"
 
+alias vim=nvim
 
 EOF
 
