@@ -12,7 +12,7 @@ sudo NEEDRESTART_MODE=a apt update && sudo apt install tmux zsh vim curl git xcl
 python3-pip python3-dev git libssl-dev libffi-dev build-essential unzip python3-venv fzf -y
 
 sudo NEEDRESTART_MODE=a apt install golang-go cargo -y 
-sudo NEEDRESTART_MODE=a apt install pipx neovim -y
+# sudo NEEDRESTART_MODE=a apt install pipx neovim -y
 pipx ensurepath
 sudo pipx ensurepath --global
 
@@ -21,7 +21,25 @@ sudo pipx ensurepath --global
 sudo sh -c "$(wget -qO- https://starship.rs/install.sh)" "" -y
 
 # ---------------------- install docker
-sudo NEEDRESTART_MODE=a apt install docker docker-compose -y
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    if [[ "$ID" == "ubuntu" ]]; then
+        echo "[+] Detected Ubuntu system."
+        if ! command -v snap &> /dev/null; then
+            echo "[*] Snap not found. Installing snapd..."
+            sudo NEEDRESTART_MODE=a apt install snapd -y
+        fi
+        sudo snap install docker
+        sudo snap install nvim --classic
+
+    else
+        sudo NEEDRESTART_MODE=a apt install docker docker-compose -y
+    fi
+else
+    echo "[-] Cannot determine operating system."
+fi
+
+
 sudo systemctl enable docker --now
 sudo usermod -aG docker $USER
 # ----------------------  dracula tmux theme
