@@ -247,6 +247,5 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCo
 mkdir -p ~/.local/share/fonts ;  unzip /tmp/CascadiaCode.zip Caskaydia\ Cove\ Nerd\ Font\ Complete.ttf -d ~/.local/share/fonts
 
 # ---------------------- install gef in gdb 
-wget -O ~/.gdbinit-gef.py -q https://github.com/hugsy/gef/raw/master/gef.py
-echo source ~/.gdbinit-gef.py >> ~/.gdbinit
+bash -c "$(curl -fsSL https://gef.blah.cat/sh)"
 
