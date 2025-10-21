@@ -15,7 +15,7 @@ sudo NEEDRESTART_MODE=a apt install golang-go cargo -y
 # sudo NEEDRESTART_MODE=a apt install pipx neovim -y
 pipx ensurepath
 sudo pipx ensurepath --global
-
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # ---------------------- install startship zsh
 sudo sh -c "$(wget -qO- https://starship.rs/install.sh)" "" -y
