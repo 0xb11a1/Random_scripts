@@ -21,26 +21,16 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 sudo sh -c "$(wget -qO- https://starship.rs/install.sh)" "" -y
 
 # ---------------------- install docker
-if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    if [[ "$ID" == "ubuntu" ]]; then
-        echo "[+] Detected Ubuntu system."
-        if ! command -v snap &> /dev/null; then
-            echo "[*] Snap not found. Installing snapd..."
-            sudo NEEDRESTART_MODE=a apt install snapd -y
-        fi
-        sudo snap install docker
-        sudo snap install nvim --classic
 
-    else
-        sudo NEEDRESTART_MODE=a apt install docker docker-compose -y
-    fi
-else
-    echo "[-] Cannot determine operating system."
-fi
-
-
+curl -sSL https://get.docker.com/ | CHANNEL=stable sudo sh
 sudo systemctl enable docker --now
+
+
+sudo apt update
+sudo apt install docker-compose-plugin
+
+
+
 sudo usermod -aG docker $USER
 # ----------------------  dracula tmux theme
 
